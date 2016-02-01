@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset=utf-8 />
+    <title><%= title %></title>
+    <link rel="stylesheet" media="screen" href="css/styles.css" >
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head
+
+<body>
+<header class="navbar" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <a id="titre" class="navbar-brand" >Web Semantique</a>
+                </div>
+                <div class="collapse navbar-collapse">
+					<% if (user != '') { %>
+					<form class="deconnexion" action="/logout" method="get" name="deconnexion">
+					<a href="/profile" type="button" class="btn btn-default navbar-btn">Accueil</a>
+                     <a href="/paint" type="button" class="btn btn-default navbar-btn">Pictionary</a>
+					 <a href="/dessin" type="button" class="btn btn-default navbar-btn">Mes dessins</a>
+					 <a href="/logout" type="button" class="btn btn-default navbar-btn navbar-right">Deconnexion</a>
+                    
+					</form>
+	<% }  else {%>
+	<a href="/login" class="btn btn-default navbar-btn navbar-right" type="button">Connexion</a>
+	<a href="/auth/facebook" class="btn btn-default navbar-btn navbar-right"><span class="fa fa-facebook"></span> Facebook</a>
+    <a href="/signup" class="btn btn-default navbar-btn navbar-right" type="button">Inscription</a>
+	<%}%>
+	 </div>
+            </div>
+</header>

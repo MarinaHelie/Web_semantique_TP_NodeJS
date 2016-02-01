@@ -16,19 +16,28 @@
                     <a id="titre" class="navbar-brand" >Web Semantique</a>
                 </div>
                 <div class="collapse navbar-collapse">
-					<% if (user != '') { %>
-					<form class="deconnexion" action="/logout" method="get" name="deconnexion">
-					<a href="/profile" type="button" class="btn btn-default navbar-btn">Accueil</a>
-                     <a href="/paint" type="button" class="btn btn-default navbar-btn">Pictionary</a>
-					 <a href="/dessin" type="button" class="btn btn-default navbar-btn">Mes dessins</a>
-					 <a href="/logout" type="button" class="btn btn-default navbar-btn navbar-right">Deconnexion</a>
-                    
-					</form>
-	<% }  else {%>
-	<a href="/login" class="btn btn-default navbar-btn navbar-right" type="button">Connexion</a>
-	<a href="/auth/facebook" class="btn btn-default navbar-btn navbar-right"><span class="fa fa-facebook"></span> Facebook</a>
-    <a href="/signup" class="btn btn-default navbar-btn navbar-right" type="button">Inscription</a>
-	<%}%>
+					<% if (user != '') { 
+								if (user.statut != null) {%>
+									<form class="deconnexion" action="/logout" method="get" name="deconnexion">
+									<a href="/profile" type="button" class="btn btn-default navbar-btn">Accueil</a>
+									<a href="/admin" type="button" class="btn btn-default navbar-btn">Administration Utilisateur</a>
+									<a href="/admindessin" type="button" class="btn btn-default navbar-btn">Administration Dessin</a>
+									<a href="/logout" type="button" class="btn btn-default navbar-btn navbar-right">Deconnexion</a>
+									</form>
+								<% } else {%>
+									<form class="deconnexion" action="/logout" method="get" name="deconnexion">
+									<a href="/profile" type="button" class="btn btn-default navbar-btn">Accueil</a>
+									 <a href="/paint" type="button" class="btn btn-default navbar-btn">Pictionary</a>
+									 <a href="/dessin" type="button" class="btn btn-default navbar-btn">Mes dessins</a>
+									 <a href="/logout" type="button" class="btn btn-default navbar-btn navbar-right">Deconnexion</a>
+									
+									</form>
+								<%}%>
+					<% } else {%>
+							<a href="/login" class="btn btn-default navbar-btn navbar-right" type="button">Connexion</a>
+							<a href="/auth/facebook" class="btn btn-default navbar-btn navbar-right"><span class="fa fa-facebook"></span> Facebook</a>
+							<a href="/signup" class="btn btn-default navbar-btn navbar-right" type="button">Inscription</a>
+					<%}%>
 	 </div>
             </div>
 </header>

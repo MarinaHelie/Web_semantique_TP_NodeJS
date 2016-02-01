@@ -1,0 +1,27 @@
+<% var title = 'Administration dessin' %>
+<% include head %>
+<% if(user != '') { %>
+<div class="container" >
+    <div class="row centered-form">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-sm-offset-6 col-md-offset-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h1 class="panel-title"><strong> Dessins utilisateurs  </strong></h1>
+                    </div>
+                    <div class="panel-body">
+                         <form method="post" action="/admindessin">   
+                          <div class="form-group">
+						  <ul class="list-group">
+						   <% for(var i=0; i<draw.length; i++) { %>
+						   <li class="list-group-item""><a  name="id" value=<%=draw[i].id%> href="/guess?id=<%= draw[i].id %>">Dessin <%= i %></a> <button type="submite" class="btn btn btn-danger btn-right" value="supprimer"/> Supprimer </button> </li>
+							<% }} %>
+							</ul>
+                          </div>
+						  </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ 
+ 

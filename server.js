@@ -139,6 +139,48 @@ app.post('/signup', passport.authenticate('local-signup', {
         failureRedirect : '/signup', // redirect back to the signup page if there is an error
         failureFlash : true // allow flash messages
     }));
+	
+app.get('/admin',isLoggedIn, function(req, res)
+{
+	res.render('admin', {user:req.user});
+});
+
+app.get('/admindessin',isLoggedIn,function(req, res)
+{
+	   connection.query('SELECT id FROM drawings ;', function(err, rows)
+        {
+            if (err)
+            { 
+                res.writeHead(200);
+                res.end('error');
+            } 
+            else
+            {
+                res.render('admindessin', { user : req.user, draw : rows });
+            }
+        });
+});
+
+app.post('/admindessin',function(req, res)
+{
+	var query  = req.body.id;
+	console.log (query);
+	connection.query('Delete from drawings where id='+ query +';', function(error, rows) 
+	{ if (error)
+		{
+			
+			res.writeHead (200);
+			res.end ('error boulet');
+		}
+		else
+		{
+			res.redirect ('/admindessin');
+
+		}
+	})
+	
+
+});
 app.get('/logout', function(req, res) 
 {
         req.logout();

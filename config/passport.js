@@ -5,6 +5,7 @@ var LocalStrategy   = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 
 var mysql = require('mysql');
+var User= require('../model/user');
 
 var connection = mysql.createConnection({
 				  host     : 'localhost',
@@ -103,12 +104,11 @@ module.exports = function(passport) {
     // by default, if there was no name, it would just be called 'local'
 
     passport.use('local-login', new LocalStrategy({
-        // by default, local strategy uses username and password, we will override with email
         usernameField : 'email',
         passwordField : 'password',
-        passReqToCallback : true // allows us to pass back the entire request to the callback
+        passReqToCallback : true 
     },
-    function(req, email, password, done) { // callback with email and password from our form
+    function(req, email, password, done) { 
 
          connection.query("SELECT * FROM `users` WHERE `email` = '" + email + "'",function(err,rows){
 			if (err)
@@ -117,11 +117,11 @@ module.exports = function(passport) {
                 return done(null, false, req.flash('loginMessage', 'No user found.')); // req.flash is the way to set flashdata using connect-flash
             } 
 			
-			// if the user is found but the password is wrong
+			// Si l'utilisateur est trouvé mais que le mot de passe est faux 
             if (!( rows[0].password == password))
                 return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
 			
-            // all is well, return successful user
+            // Si toutes les données de connexion sont juste 
             return done(null, rows[0]);			
 		
 		});
@@ -134,7 +134,7 @@ module.exports = function(passport) {
         // pull in our app id and secret from our auth.js file
         clientID        : '1713731028841064',
         clientSecret    : '44a0988501a333398041dfe84e83ab5d',
-        callbackURL     : 'https://apps.facebook.com/1713731028841064'
+        callbackURL     : 'http://localhost:1313/auth/facebook/callback'
 
     },
 
